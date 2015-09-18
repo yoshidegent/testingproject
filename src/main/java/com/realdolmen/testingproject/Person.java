@@ -11,8 +11,8 @@ public class Person implements MyPrintJob {
         this.lastName = lastName;
     }
 
-    public boolean print(Printer printer){
+    public boolean print(Printer printer, Document document){
         printer.addToQueue(this);
-        return printer.startPrinting();
+        return printer.startPrinting(document);
     }
 }

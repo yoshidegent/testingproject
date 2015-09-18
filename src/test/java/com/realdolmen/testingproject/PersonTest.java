@@ -1,18 +1,21 @@
 package com.realdolmen.testingproject;
 
 import org.junit.*;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
-/**
- * Created by YDEAX41 on 18/09/2015.
- */
+@RunWith(MockitoJUnitRunner.class)
 public class PersonTest
 {
     private Person person;
 
     @Mock
     private Printer printerMock;
+
+    @Mock
+    private Document documentMock;
 
     @Before
     public void before()
@@ -24,7 +27,16 @@ public class PersonTest
     @Test
     public void testPrint()
     {
-        Mockito.when(printerMock.startPrinting()).thenReturn(true);
-        Assert.assertTrue(person.print(printerMock));
+        Mockito.when(printerMock.startPrinting(documentMock)).thenReturn(true);
+        Assert.assertTrue(person.print(printerMock, documentMock));
+        Mockito.verify(printerMock).startPrinting(documentMock);
+        Mockito.verify(printerMock, Mockito.times(1)).startPrinting(documentMock);
+    }
+
+    @Test(expected=IllegalStateException.class)
+    public void testPrintWithThrow()
+    {
+        Mockito.when(printerMock.startPrinting(documentMock)).thenThrow(new IllegalStateException());
+        Assert.assertTrue(person.print(printerMock, documentMock));
     }
 }

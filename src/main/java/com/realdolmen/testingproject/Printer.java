@@ -11,9 +11,9 @@ public class Printer
         jobs.add(job);
     }
 
-    public boolean startPrinting()
+    public boolean startPrinting(Document document)
     {
-        //TODO: to be implemented
+        document.print();
         return true;
     }
 }
