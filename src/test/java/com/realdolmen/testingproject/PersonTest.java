@@ -18,7 +18,7 @@ public class PersonTest
     public void before()
     {
         person = new Person("Yoshi", "Degent");
-        printerMock = Mockito.mock(Printer.class);
+        //printerMock = Mockito.mock(Printer.class);
     }
 
     @Test
