@@ -31,6 +31,7 @@ public class PersonTest
         Assert.assertTrue(person.print(printerMock, documentMock));
         Mockito.verify(printerMock).startPrinting(documentMock);
         Mockito.verify(printerMock, Mockito.times(1)).startPrinting(documentMock);
+        Mockito.verify(printerMock, Mockito.atLeastOnce()).startPrinting(documentMock);
     }
 
     @Test(expected=IllegalStateException.class)
